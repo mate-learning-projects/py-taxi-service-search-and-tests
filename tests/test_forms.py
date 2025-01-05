@@ -9,7 +9,6 @@ User = get_user_model()
 
 class ValidateLicenseNumberTest(TestCase):
     def test_license_number_valid(self):
-        # должно пройти проверку
         self.assertEqual(validate_license_number("ABC12345"), "ABC12345")
 
     def test_license_number_too_short(self):

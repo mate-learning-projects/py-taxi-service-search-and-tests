@@ -17,10 +17,8 @@ class IndexViewTest(TestCase):
         self.assertRedirects(response, "/accounts/login/?next=/")
 
     def test_index_displays_counts(self):
-        # Залогиним
         self.client.login(username="testuser", password="password")
 
-        # Создадим пару записей
         Manufacturer.objects.create(name="Audi", country="Germany")
         Manufacturer.objects.create(name="BMW", country="Germany")
         Car.objects.create(
@@ -41,13 +39,11 @@ class IndexViewTest(TestCase):
 class ManufacturerListViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        # Создадим 13 объектов для проверки пагинации
         for i in range(13):
             Manufacturer.objects.create(
                 name=f"Manuf_{i}", country="Country_{i}")
 
     def setUp(self):
-        # Логиним пользователя
         self.user = User.objects.create_user(
             username="testuser", password="password")
         self.client.login(username="testuser", password="password")
@@ -141,6 +137,7 @@ class CarDetailViewTest(TestCase):
 class DriverListViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
+        Driver.objects.all().delete()
         for i in range(6):
             Driver.objects.create_user(
                 username=f"driver{i}",
